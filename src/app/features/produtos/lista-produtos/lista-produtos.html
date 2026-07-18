@@ -1,3 +1,13 @@
+<!--CONDIÇÃO E DECLARAÇÃO DE CORES-->
+<h2>
+    Produto selecionado:
+    @if(produtoSelecionado()){
+        <strong style="color:green">{{produtoSelecionado()| uppercase}} </strong>
+    }@else {
+        <span style="color: gray">Nenhum Produto Selecionado</span>
+    }
+</h2>
+<hr>
 @for(item of produtos(); track item)
 {
     <app-produto 
@@ -6,6 +16,14 @@
     (produtoSelecionado)="exibirProduto($event)">
     </app-produto>
 }
-<button (click)="adicionarProduto()">Adicionar produto</button>
+<hr>
+<p><button (click)="adicionarProduto()">Adicionar produto</button></p>
+<h4>Adiciona nossos produtos mais vendidos!!</h4>
+<p><button (click)="substituirProdutos()">Substituir Produto</button></p>
+<h4>Produtos genéricos de alta qualidade!!</h4>
+<hr>
 <h2>Total de Produtos: {{totalProdutos()}}</h2>
+<hr>
 <h3>Valor Total: {{valorTotal() | precoFormatado}}</h3>
+<hr>
+<p>A SEGUIR VEJA NOSSAS PROMOÇÕES DE HOJE ;)</p>
