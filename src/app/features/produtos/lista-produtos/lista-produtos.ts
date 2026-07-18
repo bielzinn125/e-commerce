@@ -3,9 +3,11 @@ import { Produto } from '../produto/produto';
 import { signal } from '@angular/core';
 import {computed} from '@angular/core';
 import { PrecoFormatadoPipe } from '../../../pipes/preco-formatado-pipe';
+import { effect } from '@angular/core';
+import { UpperCasePipe } from '@angular/common';
 @Component({
   selector: 'app-lista-produtos',
-  imports: [Produto, PrecoFormatadoPipe],
+  imports: [Produto, PrecoFormatadoPipe, UpperCasePipe],
   templateUrl: './lista-produtos.html',
   styleUrl: './lista-produtos.css',
 })
@@ -19,7 +21,9 @@ export class ListaProdutos {
     {nome: ' CPU ordexx', preco: 455.89}
   ]);
   //!FUNÇÃO PARA EXIBIR PRODUTOS SELECIONADOS PELO USUARIO NO CONSOLE
-  exibirProduto (nome: string){console.log('Produto Selecionado:',nome );
+  exibirProduto (nome: string){
+    console.log('Produto Selecionado:',nome );
+    this.produtoSelecionado.set(nome);
   }
   //FUNÇÃO ADICIONA PRODUTO USANDO METODO UPDATE
 adicionarProduto (){
@@ -35,5 +39,31 @@ totalProdutos = computed (()=> this.produtos().length);
 valorTotal = computed(()=> 
  {return this.produtos().reduce((total, item) =>
 total + item.preco,0)});
+//!FUNÇÃO PARA SUBSTITUIR A LISTA ATUAL USANDO METODO SET
+substituirProdutos(){
+  this.produtos.set([
+    {nome: 'Notebook ASER', preco: 870.90},
+    {nome: 'Monitor Positivo', preco: 1340.90},
+    {nome: 'CPU simples', preco: 190.90},
+    {nome: 'Mouse philiphs', preco: 76.99},
+    {nome: 'Headset Gamer', preco: 60.00},
+  ])
+}
+//METODO PARA MONITORAR ALTERAÇÕES EM TEMPO REAL USANDO EFFECT
+constructor(){ 
+  effect(() => {
+    console.log('Lista de Produtos Alterados: ', this.produtos());
+  });
+  effect(() => {
+    console.log('Valor Total Atualizado: ', this.valorTotal());
+  });
+  effect(() => {
+    if (typeof document !== 'undefined'){
+      document.title = `(${this.totalProdutos()}) - Loja do Biel`; 
+    }
+  });
+}
+//!METODO PARA CRIAR UM ESTADO DE SELEÇÃO COM SIGNAL STRING | NULL
+produtoSelecionado = signal <string | null>(null);
 
 }
