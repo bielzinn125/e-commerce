@@ -25,20 +25,31 @@ export class ListaProdutos {
     console.log('Produto Selecionado:',nome );
     this.produtoSelecionado.set(nome);
   }
-  //FUNÇÃO ADICIONA PRODUTO USANDO METODO UPDATE
+  //!FUNÇÃO ADICIONA PRODUTO USANDO METODO UPDATE
 adicionarProduto (){
   this.produtos.update(listaAtual => [...listaAtual,
     {nome:'PlayStation 5', preco: 3500},
     {nome:'BIELZIM', preco: 9999}
   ]);
 }
-//FUNÇÃO QUE CONTABILIZA A QUANTIDADE DE ITENS DA LISTa
+
+
+
+
+//!FUNÇÃO QUE CONTABILIZA A QUANTIDADE DE ITENS DA LISTa
 totalProdutos = computed (()=> this.produtos().length);
 
 //!FUNÇÃO CALCULA O VALOR TOTAL DOS PRODUTOS USANDO METODO COMPUTED
 valorTotal = computed(()=> 
  {return this.produtos().reduce((total, item) =>
 total + item.preco,0)});
+
+
+
+
+
+
+
 //!FUNÇÃO PARA SUBSTITUIR A LISTA ATUAL USANDO METODO SET
 substituirProdutos(){
   this.produtos.set([
@@ -65,5 +76,18 @@ constructor(){
 }
 //!METODO PARA CRIAR UM ESTADO DE SELEÇÃO COM SIGNAL STRING | NULL
 produtoSelecionado = signal <string | null>(null);
+//! METODO PARA CRIAR UM ESTADO PARA CARRINHO COM SIGNAL
 
+carrinho = signal <{nome: string; preco: number}[]>([]);
+
+adicionarCarrinho(produto: {nome: string; preco: number}){
+  this.carrinho.update (listaAtual => [
+    ...listaAtual, produto]);
 }
+//metodo calcula quantidade total de intens no carrinho
+quantidadeCarrinho=computed(() => this.carrinho().length);
+//metodo calcula valor total do carrinho
+valorCarrinho=computed(() => this.carrinho().reduce((total, item) =>
+total + item.preco,0))
+
+};      
