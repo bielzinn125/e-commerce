@@ -3,11 +3,11 @@ import { Carrinho } from './features/carrinho/carrinho/carrinho';
 import { ListaProdutos } from './features/produtos/lista-produtos/lista-produtos';
 export const routes: Routes = [
     {
-        path:'',
+        path:'', //!rota original/raiz
         component: ListaProdutos,
     },
      {
-        path:'carrinho',
+        path:'carrinho',//!rota carrinho
         component: Carrinho,
     },
 ];
