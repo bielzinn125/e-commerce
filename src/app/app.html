@@ -1,3 +1,8 @@
-<!--apaga template nativo angular cli, adiciona app produto -->
-<h1>Minha Loja Virtual</h1>
-<app-lista-produtos></app-lista-produtos>
+<h1>{{nomeLoja | uppercase}}</h1>
+<nav>
+    <a routerLink="/"> Produtos      <hr> </a>
+    <a routerLink="/carrinho"> Carrinho <hr> </a>
+</nav>
+
+<router-outlet></router-outlet>
+<!--! adiciona link para uma nova rota-->
