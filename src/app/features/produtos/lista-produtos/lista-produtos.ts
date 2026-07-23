@@ -5,6 +5,8 @@ import {computed} from '@angular/core';
 import { PrecoFormatadoPipe } from '../../../pipes/preco-formatado-pipe';
 import { effect } from '@angular/core';
 import { UpperCasePipe } from '@angular/common';
+import { HttpClient } from '@angular/common/http'; 
+
 @Component({
   selector: 'app-lista-produtos',
   imports: [Produto, PrecoFormatadoPipe, UpperCasePipe],
@@ -14,12 +16,11 @@ import { UpperCasePipe } from '@angular/common';
 export class ListaProdutos {
   
   //!LISTA COM DADOS
-  produtos = signal ( [
-    {nome: ' Cadeira gamer', preco: 399.99},
-    {nome: ' Processador devx', preco: 344.50},
-    {nome: ' Monitor Dell', preco: 1789.90},
-    {nome: ' CPU ordexx', preco: 455.89}
-  ]);
+  produtos = signal < {nome: string, preco: number}[]>([]);
+   // {nome: ' Processador devx', preco: 344.50},
+   // {nome: ' Monitor Dell', preco: 1789.90},
+   // {nome: ' CPU ordexx', preco: 455.89}
+  
   //!FUNÇÃO PARA EXIBIR PRODUTOS SELECIONADOS PELO USUARIO NO CONSOLE
   exibirProduto (nome: string){
     console.log('Produto Selecionado:',nome );
@@ -61,7 +62,8 @@ substituirProdutos(){
   ])
 }
 //METODO PARA MONITORAR ALTERAÇÕES EM TEMPO REAL USANDO EFFECT
-constructor(){ 
+constructor(private http: HttpClient){ 
+  this.carregarProdutos();
   effect(() => {
     console.log('Lista de Produtos Alterados: ', this.produtos());
   });
@@ -90,4 +92,32 @@ quantidadeCarrinho=computed(() => this.carrinho().length);
 valorCarrinho=computed(() => this.carrinho().reduce((total, item) =>
 total + item.preco,0))
 
-};      
+
+//!função cria estado de carregamento
+carregando = signal(true);
+
+//loading
+carregarProdutos(){
+  this.carregando.set(true);
+  this.http.get<any[]>//<{ nome: string; preco: number }[]>
+  ('https://fakestoreapi.com/products').subscribe({
+    next: (dados =>{
+      const produtosFormatados = dados.map(p => ({
+        nome: p.title,
+        preco: p.price,
+      }));
+
+      this.produtos.set(produtosFormatados);
+      this.carregando.set(false);
+
+    }),
+    error:(erro) => {
+      console.error('Erro ao carregar produtos: ', erro);
+      this.carregando.set(false);
+    }
+  });
+}
+
+
+
+};
