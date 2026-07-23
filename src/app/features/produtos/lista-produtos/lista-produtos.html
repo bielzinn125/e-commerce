@@ -8,8 +8,14 @@
     }
 </h2>
 <hr>
-@for(item of produtos(); track item)
-{
+
+<h2>Produtos</h2>
+@if (carregando()) {
+    <p>Carregando produtos</p>
+}
+@if (!carregando()){
+ @for(item of produtos(); track item.nome)
+ {
     <app-produto 
     [nome]="item.nome" 
     [preco]="item.preco"
@@ -17,6 +23,7 @@
     </app-produto>
     <p></p>
     <button (click)="adicionarCarrinho(item)"> Adicionar ao carrinho</button>
+ }
 }
 <hr>
 
