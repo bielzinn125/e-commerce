@@ -5,7 +5,7 @@ import {computed} from '@angular/core';
 import { PrecoFormatadoPipe } from '../../../pipes/preco-formatado-pipe';
 import { effect } from '@angular/core';
 import { UpperCasePipe } from '@angular/common';
-import { HttpClient } from '@angular/common/http'; 
+import {inject} from '@angular/core'
 
 @Component({
   selector: 'app-lista-produtos',
@@ -62,7 +62,7 @@ substituirProdutos(){
   ])
 }
 //METODO PARA MONITORAR ALTERAÇÕES EM TEMPO REAL USANDO EFFECT
-constructor(private http: HttpClient){ 
+constructor(){ 
   this.carregarProdutos();
   effect(() => {
     console.log('Lista de Produtos Alterados: ', this.produtos());
@@ -97,27 +97,25 @@ total + item.preco,0))
 carregando = signal(true);
 
 //loading
-carregarProdutos(){
-  this.carregando.set(true);
-  this.http.get<any[]>//<{ nome: string; preco: number }[]>
-  ('https://fakestoreapi.com/products').subscribe({
-    next: (dados =>{
-      const produtosFormatados = dados.map(p => ({
-        nome: p.title,
-        preco: p.price,
-      }));
+carregarProdutos() {    
+  this.carregando.set(true);    
+  
+  this.produtosService.buscarProdutos().subscribe({      
+    next: (dados) => {        
+      const produtos = this.produtosService.transformarProdutos(dados);        
+      this.produtos.set(produtos);        
+      this.carregando.set(false);      },      
+      
+      error: (erro) => {console.error('Erro ao carregar produtos:', erro);        
+        this.carregando.set(false);},    
+      }); 
+       }
+  
+      //error:(erro) => {
+      //console.error('Erro ao carregar produtos: ', erro);
+      //this.carregando.set(false);
+    
 
-      this.produtos.set(produtosFormatados);
-      this.carregando.set(false);
-
-    }),
-    error:(erro) => {
-      console.error('Erro ao carregar produtos: ', erro);
-      this.carregando.set(false);
-    }
-  });
-}
-
-
+private ProdutosService= inject(ProdutosService);
 
 };
