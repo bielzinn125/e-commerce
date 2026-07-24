@@ -1,14 +1,5 @@
 <!--CONDIÇÃO E DECLARAÇÃO DE CORES-->
-<h2>
-    Produto selecionado:
-    @if(produtoSelecionado()){
-        <strong style="color:green">{{produtoSelecionado()| uppercase}} </strong>
-    }@else {
-        <span style="color: gray">Nenhum Produto Selecionado</span>
-    }
-</h2>
-<hr>
-
+<section>
 <h2>Produtos</h2>
 @if (carregando()) {
     <p>Carregando produtos</p>
@@ -25,6 +16,18 @@
     <button (click)="adicionarCarrinho(item)"> Adicionar ao carrinho</button>
  }
 }
+
+<h2>
+    Produto selecionado:
+    @if(produtoSelecionado()){
+        <strong style="color:green">{{produtoSelecionado()| uppercase}} </strong>
+    }@else {
+        <span style="color: gray">Nenhum Produto Selecionado</span>
+    }
+</h2>
+<hr>
+
+
 <hr>
 
 <p><button (click)="adicionarProduto()">Adicionar produto</button></p>
@@ -42,9 +45,9 @@
 <h2>Total de Produtos: {{totalProdutos()}}</h2>
 <hr>
 <h3>Valor Total: {{valorTotal() | precoFormatado}}</h3>
+</section>
 
-
-
+<section>
 <hr>
 <hr>
 <hr>
@@ -59,5 +62,5 @@
 <h3><strong>Valor Total do Carrinho: {{valorCarrinho() | precoFormatado}}</strong></h3>
 
 <hr>
-
+</section>
 <p>A SEGUIR VEJA NOSSAS PROMOÇÕES DE HOJE ;)</p>
