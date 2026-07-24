@@ -6,6 +6,7 @@ import { PrecoFormatadoPipe } from '../../../pipes/preco-formatado-pipe';
 import { effect } from '@angular/core';
 import { UpperCasePipe } from '@angular/common';
 import {inject} from '@angular/core'
+import {produtosService} from '.././produtos.service'
 
 @Component({
   selector: 'app-lista-produtos',
@@ -106,16 +107,14 @@ carregarProdutos() {
       this.produtos.set(produtos);        
       this.carregando.set(false);      },      
       
-      error: (erro) => {console.error('Erro ao carregar produtos:', erro);        
-        this.carregando.set(false);},    
-      }); 
-       }
-  
-      //error:(erro) => {
-      //console.error('Erro ao carregar produtos: ', erro);
-      //this.carregando.set(false);
+      error: (erro) => {
+        console.error('Erro ao carregar produtos:', erro);        
+        this.carregando.set(false);
+      },    
     
+      
+  });
+}
 
-private ProdutosService= inject(ProdutosService);
-
-};
+private produtosService = inject(produtosService)
+}
