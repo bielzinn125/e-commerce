@@ -27,6 +27,9 @@ export class ListaProdutos {
     console.log('Produto Selecionado:',nome );
     this.produtoSelecionado.set(nome);
   }
+
+  private produtosService = inject(produtosService);
+
   //!FUNÇÃO ADICIONA PRODUTO USANDO METODO UPDATE
 adicionarProduto (){
   this.produtos.update(listaAtual => [...listaAtual,
@@ -116,5 +119,5 @@ carregarProdutos() {
   });
 }
 
-private produtosService = inject(produtosService)
+
 }
