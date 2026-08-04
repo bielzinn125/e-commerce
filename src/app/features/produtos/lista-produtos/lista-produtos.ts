@@ -16,6 +16,7 @@ import {produtosService} from '.././produtos.service'
 })
 export class ListaProdutos {
   
+ 
   //!LISTA COM DADOS
   produtos = signal < {nome: string, preco: number}[]>([]);
    // {nome: ' Processador devx', preco: 344.50},
@@ -101,8 +102,10 @@ total + item.preco,0))
 carregando = signal(true);
 
 //loading
-carregarProdutos() {    
-  this.carregando.set(true);    
+carregarProdutos() {  
+  this.erro.set(null);  //!Limpar o erro antes da requisição
+
+  this.carregando.set(true);  //!ativar o carregamento  
   
   this.produtosService.buscarProdutos().subscribe({      
     next: (dados) => {        
@@ -111,13 +114,13 @@ carregarProdutos() {
       this.carregando.set(false);      },      
       
       error: (erro) => {
-        console.error('Erro ao carregar produtos:', erro);        
+        console.error('Erro ao carregar produtos:', erro);
+        this.erro.set('Erro ao carregar os produtos. Por favor, tente novamente!')        
         this.carregando.set(false);
       },    
-    
-      
   });
 }
 
+ erro = signal < string | null > (null);
 
 }
