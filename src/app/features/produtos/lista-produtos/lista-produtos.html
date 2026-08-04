@@ -1,51 +1,27 @@
 <!--CONDIÇÃO E DECLARAÇÃO DE CORES-->
-<section>
 <h2>Produtos</h2>
-@if (carregando()) {
-    <p>Carregando produtos</p>
+
+<!--Estado 1: carregamento-->
+@if(carregando()){
+    <p><strong>Carregando produtos, Aguarde...</strong></p>
 }
-@if (!carregando()){
- @for(item of produtos(); track item.nome)
- {
-    <app-produto 
-    [nome]="item.nome" 
+<!--Estado 2: Erro-->
+@if(erro()){
+    <p><strong style="color: red;">{{ erro() }}</strong></p>
+    <button (click)="carregarProdutos()">Tente novamente</button>
+}
+@if(!carregando() && !erro()){
+    <p><strong>Quantidade de produtos:</strong>{{ totalProdutos()}}</p>
+    <hr>
+   @for(item of produtos();track $index){
+    <app-produto
+    [nome]="item.nome"
     [preco]="item.preco"
-    (produtoSelecionado)="exibirProduto($event)">
+    >
+
     </app-produto>
-    <p></p>
-    <button (click)="adicionarCarrinho(item)"> Adicionar ao carrinho</button>
- }
+   }
 }
-
-<h2>
-    Produto selecionado:
-    @if(produtoSelecionado()){
-        <strong style="color:green">{{produtoSelecionado()| uppercase}} </strong>
-    }@else {
-        <span style="color: gray">Nenhum Produto Selecionado</span>
-    }
-</h2>
-<hr>
-
-
-<hr>
-
-<p><button (click)="adicionarProduto()">Adicionar produto</button></p>
-
-<h4>Adiciona nossos produtos mais vendidos!!</h4>
-
-<p><button (click)="substituirProdutos()">Substituir Produto</button></p>
-
-<h4>Produtos genéricos de alta qualidade!!</h4>
-
-
-<hr>
-
-
-<h2>Total de Produtos: {{totalProdutos()}}</h2>
-<hr>
-<h3>Valor Total: {{valorTotal() | precoFormatado}}</h3>
-</section>
 
 <section>
 <hr>
