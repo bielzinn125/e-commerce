@@ -87,7 +87,7 @@ produtoSelecionado = signal <string | null>(null);
 
 carrinho = signal <{nome: string; preco: number}[]>([]);
 
-adicionarCarrinho(produto: {nome: string; preco: number}){
+adicionarAoCarrinho(produto: {nome: string; preco: number}){
   this.carrinho.update (listaAtual => [
     ...listaAtual, produto]);
 }
