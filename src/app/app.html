@@ -1,13 +1,18 @@
 <app-header></app-header>
+<main class="container-principal">
 
-<hr>
+<section class="bloco-controle">
+
 <mat-card-actions>
 <button mat-raised-button color="primary" (click)="login()">Login</button>
 <button mat-stroked-button color="accent" (click)="logout()">Logout</button>
 </mat-card-actions>
+
 <mat-card-header>
 <p >Status {{ usuarioLogado() ? 'Logado' : 'Deslogado'}}</p>
 </mat-card-header>
-<hr>
+
+</section>
+
 <router-outlet></router-outlet>
-<!--! adiciona link para uma nova rota-->
+</main>
