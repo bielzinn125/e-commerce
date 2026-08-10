@@ -16,7 +16,7 @@ import { CarrinhoService } from '../../../core/services/carrinho.service';
 })
 export class ListaProdutos {
   
- //!<===================SIGNALS=====================>
+ //!<============================SIGNALS===================================>
   
 
  produtos = signal < {nome: string, preco: number}[]>([]); //!LISTA COM DADOS
@@ -28,7 +28,8 @@ export class ListaProdutos {
  carregando = signal(true)
 
 
-//?<==================COMPUTED=======================>
+//?<============================COMPUTED==================================>
+
 
 //!FUNÇÃO QUE CONTABILIZA A QUANTIDADE DE ITENS DA LISTA
  totalProdutos = computed (()=> this.produtos().length); 
@@ -40,27 +41,23 @@ export class ListaProdutos {
 
 
 
-//todo<=========================INJECT====================>
+//todo<==========================INJECT==================================>
+
+
+public carrinhoService = inject(CarrinhoService)
+
+private produtosService = inject(produtosService);
 
 
 
+//*<============================FUNÇÕES==================================>
 
-
-
-
-
-
-
-
-
-  
+ 
   //!FUNÇÃO PARA EXIBIR PRODUTOS SELECIONADOS PELO USUARIO NO CONSOLE
   exibirProduto (nome: string){
     console.log('Produto Selecionado:',nome );
     this.produtoSelecionado.set(nome);
   }
-
-  private produtosService = inject(produtosService);
 
   //!FUNÇÃO ADICIONA PRODUTO USANDO METODO UPDATE
 adicionarProduto (){
@@ -69,17 +66,6 @@ adicionarProduto (){
     {nome:'BIELZIM', preco: 9999}
   ]);
 }
-
-
-
-
-
-
-
-
-
-
-
 
 //!FUNÇÃO PARA SUBSTITUIR A LISTA ATUAL USANDO METODO SET
 substituirProdutos(){
@@ -91,23 +77,6 @@ substituirProdutos(){
     {nome: 'Headset Gamer', preco: 60.00},
   ])
 }
-//METODO PARA MONITORAR ALTERAÇÕES EM TEMPO REAL USANDO EFFECT
-constructor(){ 
-  this.carregarProdutos();
-  effect(() => {
-    console.log('Lista de Produtos Alterados: ', this.produtos());
-  });
-  effect(() => {
-    console.log('Valor Total Atualizado: ', this.valorTotal());
-  });
-  effect(() => {
-    if (typeof document !== 'undefined'){
-      document.title = `(${this.totalProdutos()}) - Loja do Biel`; 
-    }
-  });
-}
-
-
 
 
 //!função cria estado de carregamento
@@ -131,12 +100,39 @@ carregarProdutos() {
   });
 }
 
- 
-public carrinhoService = inject(CarrinhoService)
+
+//!METODO PARA MONITORAR ALTERAÇÕES EM TEMPO REAL USANDO EFFECT
+constructor(){ 
+  this.carregarProdutos();
+  effect(() => {
+    console.log('Lista de Produtos Alterados: ', this.produtos());
+  });
+  effect(() => {
+    console.log('Valor Total Atualizado: ', this.valorTotal());
+  });
+  effect(() => {
+    if (typeof document !== 'undefined'){
+      document.title = `(${this.totalProdutos()}) - Loja do Biel`; 
+    }
+  });
+}
+
 
 quantidadeCarrinho = this.carrinhoService.quantidadeItens;
+
 totalCarrinho = this.carrinhoService.totalItens;
+
 adicionarAoCarrinho(produto: {nome: string; preco: number;}){
   this.carrinhoService.adicionar(produto);
 }
 }
+
+
+
+
+
+
+
+
+ 
+
