@@ -9,12 +9,14 @@ export const routes: Routes = [
             import ('./features/home/home/home')
         .then((m) => m.Home),
     },
+
     {
         path:'produtos', //!rota para raiz localhost:4200/produtos
         loadComponent:() =>
             import ('./features/produtos/lista-produtos/lista-produtos')
         .then((m) => m.ListaProdutos),
     },
+
     {
         path:'carrinho', //!rota para raiz localhost:4200/carrinho
         canActivate: [authGuard],
@@ -22,7 +24,17 @@ export const routes: Routes = [
             import ('./features/carrinho/carrinho/carrinho')
         .then((m) => m.Carrinho),
     },
+    
     {
+        path:'checkout',
+        loadComponent: () => 
+              import('./features/checkout/checkout/checkout')
+        .then((m)=> m.Checkout),
+    },
+    
+
+  
+  {
         path:'**',
         redirectTo:'',
     },
