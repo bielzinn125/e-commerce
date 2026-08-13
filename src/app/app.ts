@@ -4,7 +4,7 @@ import { RouterLink } from '@angular/router';
 //import { Produto } from './components/produto/produto';
 //import { UpperCasePipe } from '@angular/common';
 //import { Produto } from "./features/produtos/produto/produto";
-import { usuarioLogado, login, logout } from './core/auth';
+//import { usuarioLogado, login, logout } from './core/auth';
 import { MatButtonModule} from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { Header } from './shared/layout/header/header';
@@ -18,8 +18,4 @@ export class App {
   protected readonly title = signal('e-commerce');
 
   nomeLoja = 'cyber engenharia';
-usuarioLogado = usuarioLogado;
-login = login;
-logout = logout;
-
 }
