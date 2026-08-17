@@ -39,6 +39,12 @@ this.erroLogin.set(true);
 return;
 }
 
+if (this.authService.ehAdmin()) {
+this.router.navigateByUrl('/admin');
+return;
+}
+
 this.router.navigateByUrl('/produtos');
 }
+
 }
