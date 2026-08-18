@@ -1,6 +1,8 @@
 <section class="acesso-negado">
     <h2 style="color: red;">XXXX ACESSO NEGADO XXXX</h2>
     <p>Você está autenticado, porém não possui permissão para acessar esta área</p>
+    <img src="images.jpg" alt="acesso negado">
     <p>Apenas usuários com perfil administrador podem acessar essa página</p>
-    <button type="button" routerLink="/produtos">Voltar para Produtos</button>
+    <button mat-raised-button color="primary" type="button" routerLink="/produtos">Voltar para Produtos</button>
+    <button mat-stroked-button color="accent" type="button" (click)="sair()">Sair</button>
 </section>
