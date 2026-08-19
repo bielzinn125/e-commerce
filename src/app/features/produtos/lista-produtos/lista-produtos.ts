@@ -7,7 +7,7 @@ import { effect } from '@angular/core';
 import { UpperCasePipe } from '@angular/common';
 import {inject} from '@angular/core'
 import {produtosService} from '../../../core/services/produtos.service'
-import { CarrinhoService } from '../../../core/services/carrinho.service';
+import { CarrinhoFacade } from '../../../core/facades/carrinho.facade';
 @Component({
   selector: 'app-lista-produtos',
   imports: [Produto, PrecoFormatadoPipe, UpperCasePipe],
@@ -44,7 +44,7 @@ export class ListaProdutos {
 //todo<==========================INJECT==================================>
 
 
-public carrinhoService = inject(CarrinhoService)
+public carrinhoFacade = inject(CarrinhoFacade)
 
 private produtosService = inject(produtosService);
 
@@ -118,12 +118,12 @@ constructor(){
 }
 
 
-quantidadeCarrinho = this.carrinhoService.quantidadeItens;
+quantidade = this.carrinhoFacade.quantidade;
 
-totalCarrinho = this.carrinhoService.totalItens;
+total = this.carrinhoFacade.total;
 
 adicionarAoCarrinho(produto: {nome: string; preco: number;}){
-  this.carrinhoService.adicionar(produto);
+  this.carrinhoFacade.adicionarProduto(produto);
 }
 }
 
