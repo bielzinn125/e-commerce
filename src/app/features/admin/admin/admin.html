@@ -1,5 +1,40 @@
+<section class="painel-admin">
 <h2>Área Administrativa</h2>
 
 <p>Esta página representa uma área restrita da aplicação.</p>
 
 <p>Somente usuários com perfil de administrador devem conseguir acessar esta rota.</p>
+<section class="bloco-admin">
+<p><strong>E-mail:</strong> {{usuarioAtual()?.email}} </p>
+<p><strong>Perfil</strong> {{usuarioAtual()?.perfil}} </p>
+<p>{{areaPerfil()}}</p>
+</section>
+<hr>
+<section class="cards-admin">
+    <article>
+        <h3>Produtos Cadastrados</h3>
+        <p>{{totalProdutosCadastrados()}}</p>
+    </article>
+
+     <article>
+        <h3>Pedidos Pendentes</h3>
+        <p>{{pedidosPendentes()}}</p>
+    </article>
+
+     <article>
+        <h3>Usuários Cadastrados</h3>
+        <p>{{usuariosCadastrados()}}</p>
+    </article>
+</section>
+
+<section class="acoes-admin"></section>
+<p>
+    Nesta etapa as ações ainda são simuladas.
+    Nas Proximas etapas poderam ser conectadas a Apis reais
+</p>
+<button mat-raised-button type="button">Cadastrar Produtos</button>
+<button mat-raised-button type="button">Gerenciar Pedidos</button>
+<button mat-raised-button type="button">Gerenciar Usuários</button>
+<hr>
+<button mat-stroked-button type="button" (click)="sair()">Sair</button>
+</section>
