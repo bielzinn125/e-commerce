@@ -22,14 +22,17 @@ token = this.authService.token;
 login(email: string, senha: string): boolean {
 return this.authService.login(email, senha);
 }
+
 //!Ação de alto nível para logout.
 logout() {
 this.authService.logout();
 }
+
 //!Método mantido para integrações técnicas, como interceptor HTTP.
 obterToken(): string | null {
 return this.authService.obterToken();
 }
+
 //!Método de leitura do perfil atual.
 obterPerfil() {
 return this.authService.obterPerfil();

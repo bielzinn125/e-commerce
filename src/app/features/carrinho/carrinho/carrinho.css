@@ -1,0 +1,15 @@
+.item{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 50%;
+    margin: 10px;
+
+}
+.acoes-carrinho button{
+    margin: 10px;
+}
+.btn-confirmar button {
+   background-color: #329932;
+    color: #fff;
+}

@@ -32,7 +32,7 @@ usuarioAtual = this.authFacade.usuarioAtual;
 
 sair() {
 //* Logout feito pela facade, não mais diretamente pelo service.
-this.authFacade.sair();
+this.authFacade.logout();
 this.router.navigateByUrl('/login');
 }
 }
