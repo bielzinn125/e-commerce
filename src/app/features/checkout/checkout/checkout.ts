@@ -2,10 +2,11 @@ import { Component, inject, signal } from '@angular/core';
 import {ReactiveFormsModule, FormGroup,FormControl} from '@angular/forms';
 import { Validators,AbstractControl,ValidationErrors } from '@angular/forms';
 import { CarrinhoFacade } from '../../../core/facades/carrinho.facade';
+import { RouterLink } from '@angular/router';
 import { PrecoFormatadoPipe } from '../../../pipes/preco-formatado-pipe';
 @Component({
   selector: 'app-checkout',
-  imports: [ReactiveFormsModule, PrecoFormatadoPipe],
+  imports: [ReactiveFormsModule, PrecoFormatadoPipe, RouterLink],
   templateUrl: './checkout.html',
   styleUrl: './checkout.css',
 })
@@ -13,7 +14,6 @@ export class Checkout {
   carrinhoFacade = inject(CarrinhoFacade);
 
   compraFinalizada = signal(false);
-
 
   formulario = new FormGroup({
     nome: new FormControl('',[Validators.required,Validators.minLength(2),nomeSemNumeros]),
