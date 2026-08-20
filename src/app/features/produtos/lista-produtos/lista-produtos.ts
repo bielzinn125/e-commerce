@@ -8,6 +8,9 @@ import { UpperCasePipe } from '@angular/common';
 import {inject} from '@angular/core'
 import {produtosService} from '../../../core/services/produtos.service'
 import { CarrinhoFacade } from '../../../core/facades/carrinho.facade';
+import { ItemCarrinho } from '../../../core/models/item-carrinho';
+
+
 @Component({
   selector: 'app-lista-produtos',
   imports: [Produto, PrecoFormatadoPipe, UpperCasePipe],
@@ -122,7 +125,7 @@ quantidade = this.carrinhoFacade.quantidade;
 
 total = this.carrinhoFacade.total;
 
-adicionarAoCarrinho(produto: {nome: string; preco: number;}){
+adicionarAoCarrinho(produto: ItemCarrinho){
   this.carrinhoFacade.adicionarProduto(produto);
 }
 }
