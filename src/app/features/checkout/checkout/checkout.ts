@@ -11,15 +11,8 @@ Validators,
 import { RouterLink } from '@angular/router';
 import { CarrinhoFacade } from '../../../core/facades/carrinho.facade';
 import { ItemCarrinho } from '../../../core/models/item-carrinho';
+import { PedidoFinalizado } from '../../../core/models/pedido-finalizado';
 
-
-type PedidoFinalizado = {
-codigo: number;
-cliente: string;
-quantidadeItens: number;
-total: number;
-itens: ItemCarrinho[];
-};
 
 
 function nomeSemNumeros(control: AbstractControl): ValidationErrors | null {
